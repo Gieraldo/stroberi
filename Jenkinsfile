@@ -6,8 +6,7 @@ pipeline {
         stage('Remote SSH') {
             steps{
                echo "remote server apache"
-                    //sh 'ssh root@3.111.35.31 -p 22 && cd /var/www/html/stroberi && git pull'
-                  sh 'whoami'     
+                    sh 'sudo su && ssh root@3.111.35.31 -p 22 && cd /var/www/html/stroberi && git pull'   
             }
         }
     }
