@@ -8,7 +8,7 @@ pipeline {
                 
                 sshagent(credentials: ['Apache2']) {
                     sh '''
-                        ssh root@3.111.35.31 -p 22
+                        ssh root@3.111.35.31
                         cd /var/www/html/stroberi && git pull
                     '''
                  }
