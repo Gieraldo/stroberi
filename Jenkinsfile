@@ -6,7 +6,8 @@ pipeline {
             steps{
                 echo "remote server apache"
                 sshagent(credentials: ['Apache2']) {
-                    sh "ssh root@3.111.35.31 cd /var/www/html/stroberi && pwd && git pull origin master"
+                    sh "scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/Folder-Testing/testing-deploy root@3.111.35.31 cd /var/www/html/stroberi"
+                    //sh "ssh root@3.111.35.31 cd /var/www/html/stroberi && pwd && git pull origin master"
                  }
             }
         }
