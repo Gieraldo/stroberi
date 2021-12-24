@@ -38,7 +38,7 @@
         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <center><h3> <strong>LOG IN WEB BUAH STROBERI ANNNNN</strong> </h3>  </center> 
+              <center><h3> <strong>LOG IN WEB BUAH STROBERI aldoew</strong> </h3>  </center> 
             </div>
             <div class="panel-body">
               <form role="form" action="config/login_backend.php" method="post" onsubmit="return validasi()">
