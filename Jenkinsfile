@@ -8,7 +8,7 @@ pipeline {
             }
         }
         
-        stage('Deployment To Server') {
+        stage('Deployment To Server aldo') {
             steps{
                 echo "deploy to apache2"
                     sshagent(credentials: ['Apache2']) {
@@ -20,5 +20,18 @@ pipeline {
                  }    
             }
         }
+        stage('Deployment To Server aris') {
+            steps{
+                echo "deploy to apache2"
+                    sshagent(credentials: ['Apache2']) {
+                    sh "cd .."
+                    sh "ls"
+                    sh "scp -r * ubuntu@18.118.247.110:/var/www/html/stroberi"
+                    //sh "ssh root@3.111.35.31 cd /var/www/html/stroberi && pwd && git pull origin master"
+                    
+                 }    
+            }
+        }
+        
     }
 }
