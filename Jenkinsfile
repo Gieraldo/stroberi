@@ -14,7 +14,7 @@ pipeline {
                     sshagent(credentials: ['Apache2']) {
                     sh "cd .."
                     sh "ls"
-                    sh "scp -r * root@15.207.109.78:/var/www/html/stroberi2"
+                    sh "scp -r * root@18.118.247.110:/var/www/html/stroberi"
                     //sh "ssh root@3.111.35.31 cd /var/www/html/stroberi && pwd && git pull origin master"
                     
                  }    
