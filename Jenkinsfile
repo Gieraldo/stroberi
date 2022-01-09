@@ -1,10 +1,5 @@
 pipeline {   
-    agent any      
-    	// ::NOTIFICATION  
-	def telegram_url        = "https://api.telegram.org/bot5028938234:AAEMPp1YQqIkLBn5FXpn8mm6-QPPCV4ZAJ8/sendMessage" 
-	def telegram_chatid     = "-1001131394773"
-	def job_success         = "SUCCESS"
-	def job_error           = "ERROR"    
+    agent any        
 
     stages {
         stage('Ready To Deploy') {
