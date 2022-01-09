@@ -58,8 +58,6 @@ def notifications(Map args) {
     //    }
     //)
     }
-
-}
 }
 
  }   
