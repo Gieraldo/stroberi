@@ -1,4 +1,4 @@
-pipeline {   
+pipeline {    
     agent any        
 	// ::NOTIFICATION  
 	def telegram_url        = "https://api.telegram.org/bot5028938234:AAEMPp1YQqIkLBn5FXpn8mm6-QPPCV4ZAJ8/sendMessage" 
