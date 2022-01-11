@@ -1,10 +1,3 @@
-// ::NOTIFICATION 
-def telegram_url        = "https://api.telegram.org/bot5021645900:AAFxQI0ltL5dRTNHqLfhg1Ko1ll7hUujjp8/sendMessage" 
-def telegram_chatid     = "-1001131394773"
-def job_success         = "SUCCESS"
-def job_error           = "ERROR"
-
-
 pipeline {   
     agent any    
        
@@ -21,7 +14,7 @@ pipeline {
                     sshagent(credentials: ['Apache2']) {
                     sh "cd .."
                     sh "ls"
-                    sh "curl -s -X POST https://api.telegram.org/bot5021645900:AAFxQI0ltL5dRTNHqLfhg1Ko1ll7hUujjp8/sendMessage -d chat_id=-1001131394773 -d text='tes'"
+                    sh "curl -s -X POST https://api.telegram.org/bot5021645900:AAFxQI0ltL5dRTNHqLfhg1Ko1ll7hUujjp8/sendMessage -d chat_id=-1001131394773 -d text='mejeh'"
                     sh "scp -r * root@3.133.84.143:/var/www/html/stroberi"
                     //sh "ssh root@3.111.35.31 cd /var/www/html/stroberi && pwd && git pull origin master"
                     
