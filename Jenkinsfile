@@ -28,7 +28,7 @@ pipeline {
             }
         } 
 
-        stage ("Notifications") {
+        stage("Notifications") {
 				deleteDir()
                 echo "Job Success"
                 notifications(telegram_url: telegram_url, telegram_chatid: telegram_chatid, 
@@ -37,7 +37,7 @@ pipeline {
             }
         } catch (e) {
 
-        stage ("Error") {
+        stage("Error") {
 			deleteDir()
             echo "Job Failed"
             notifications(telegram_url: telegram_url, telegram_chatid: telegram_chatid, 
@@ -61,5 +61,5 @@ def notifications(Map args) {
 }
 
         
-    } 
-}
+     
+
