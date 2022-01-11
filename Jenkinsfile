@@ -25,7 +25,7 @@ if (action != null) {
 if (validStatuses.contains(result)) {
     def urlText = java.net.URLEncoder.encode("$result building $name $coverage", "utf-8")
     println new URL("https://api.telegram.org/bot$botId/sendMessage?chat_id=$chatId&text=$urlText").getText()
-    
+    } else {
 pipeline {   
     agent any    
        
