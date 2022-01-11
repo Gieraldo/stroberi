@@ -1,31 +1,10 @@
-// MODIFY THE FOLLOWING THREE LINES TO SUIT YOUR SPECIFIC PROJECT
-def chatId = '-1001131394773'
-def botId = '5021645900:AAFxQI0ltL5dRTNHqLfhg1Ko1ll7hUujjp8'
-def validStatuses = [hudson.model.Result.FAILURE, hudson.model.Result.UNSTABLE, hudson.model.Result.SUCCESS]
+// ::NOTIFICATION 
+def telegram_url        = "https://api.telegram.org/bot5021645900:AAFxQI0ltL5dRTNHqLfhg1Ko1ll7hUujjp8/sendMessage" 
+def telegram_chatid     = "-1001131394773"
+def job_success         = "SUCCESS"
+def job_error           = "ERROR"
 
-def result = manager.build.result
-def name = manager.build.getProject().getName()
 
-def coverage = ''
-
-def action = manager.build.getActions().find { it.getUrlName() == "jacoco" }
-if (action != null) {
-    def percentage = action.getLineCoverage().getPercentageFloat();
-    def previous = action.getPreviousResult()
-    if (previous) {
-        def delta = percentage - previous.getLineCoverage().getPercentageFloat();
-        coverage = String.format("Coverage at %.02f%% (%+.02f)", percentage, delta)
-    } else {
-        coverage = String.format("Coverage at %.02f%%", percentage)
-    }
-} else {
-    manager.listener.logger.println "No coverage info available"
-}
-
-if (validStatuses.contains(result)) {
-    def urlText = java.net.URLEncoder.encode("$result building $name $coverage", "utf-8")
-    println new URL("https://api.telegram.org/bot$botId/sendMessage?chat_id=$chatId&text=$urlText").getText()
-    } else {
 pipeline {   
     agent any    
        
@@ -47,4 +26,40 @@ pipeline {
                     
                  }    
             }
+        } 
+
+        stage ("Notifications") {
+				deleteDir()
+                echo "Job Success"
+                notifications(telegram_url: telegram_url, telegram_chatid: telegram_chatid, 
+                job: env.JOB_NAME, job_numb: env.BUILD_NUMBER, job_url: env.BUILD_URL, job_status: job_success, unitTest_score: unitTest_score
+                )
+            }
+        } catch (e) {
+
+        stage ("Error") {
+			deleteDir()
+            echo "Job Failed"
+            notifications(telegram_url: telegram_url, telegram_chatid: telegram_chatid, 
+            job: env.JOB_NAME, job_numb: env.BUILD_NUMBER, job_url: env.BUILD_URL, job_status: job_error, unitTest_score: unitTest_score
+            )
         }
+    }
+}
+
+def notifications(Map args) {
+    def message = " Dear Team PRH \n CICD Pipeline ${args.job} ${args.job_status} with build ${args.job_numb} \n\n More info at: ${args.job_url} \n\n Unit Test: ${args.unitTest_score} \n\n Total Time : ${currentBuild.durationString}"
+    sh "curl -s -X POST ${args.telegram_url} -d chat_id=${args.telegram_chatid} -d text='${message}'"
+    //parallel(
+    //     "Telegram": {
+    //       sh "curl -s -X POST ${args.telegram_url} -d chat_id=${args.telegram_chatid} -d text='${message}'"
+    //    },
+    //    "Jira": {
+            //jiraSend color: "${args.jira_url}", message: "${message}", channel: "${args.slack_channel}"
+    //    }
+    //)
+}
+
+        
+    } 
+}
